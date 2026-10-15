@@ -29,11 +29,12 @@
   <main>
     <div class="container">
       <h1>Book Us</h1>
-      <p>Tell us about your event and we'll get back to you with a quote.</p>
+      <p>Thank you for your interest in booking Sunday Brew Coffee for your event. Fill out the details below and we'll be in touch within 24–48 hours.</p>
+      <p class="muted">We're based in Arizona and can't travel out of state.</p>
 
       <form id="booking-form" class="form" novalidate>
         <div class="field">
-          <label for="name">Name</label>
+          <label for="name">Full name</label>
           <input id="name" name="name" autocomplete="name" required maxlength="120">
         </div>
         <div class="row">
@@ -43,43 +44,68 @@
           </div>
           <div class="field">
             <label for="phone">Phone</label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="40">
+            <input id="phone" name="phone" type="tel" autocomplete="tel" required maxlength="40">
           </div>
         </div>
-        <div class="field">
-          <label for="event_type">Type of event</label>
-          <input id="event_type" name="event_type" placeholder="Wedding, corporate, birthday…" maxlength="120">
+        <div class="row">
+          <div class="field">
+            <label for="event_type">Event type</label>
+            <select id="event_type" name="event_type" required>
+              <option value="">Choose one…</option>
+              <option>Wedding</option>
+              <option>Baby Shower</option>
+              <option>Birthday Party</option>
+              <option>Corporate Event</option>
+              <option>Pop Up / Market</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="field" id="event_type_other_field" hidden>
+            <label for="event_type_other">What kind of event?</label>
+            <input id="event_type_other" name="event_type_other" maxlength="120">
+          </div>
         </div>
         <div class="row">
           <div class="field">
             <label for="event_date">Event date</label>
-            <input id="event_date" name="event_date" type="date">
+            <input id="event_date" name="event_date" type="date" required>
           </div>
           <div class="field">
             <label for="event_time">Event time</label>
-            <input id="event_time" name="event_time" placeholder="e.g. 9am – 12pm" maxlength="60">
+            <input id="event_time" name="event_time" type="time">
           </div>
         </div>
         <div class="field">
-          <label for="location">Event address or city</label>
-          <input id="location" name="location" maxlength="200">
-        </div>
-        <div class="row">
-          <div class="field">
-            <label for="guest_count">Approx. number of guests</label>
-            <input id="guest_count" name="guest_count" type="number" min="0" max="100000" inputmode="numeric">
-          </div>
-          <div class="field">
-            <label for="service_type">Service</label>
-            <select id="service_type" name="service_type">
-              <option value="trailer">Coffee trailer on-site</option>
-              <option value="cold_cans">Cold can delivery</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
+          <label for="location">Event location</label>
+          <input id="location" name="location" required maxlength="200" placeholder="City + venue if known">
         </div>
         <div class="field">
-          <label for="message">Details</label>
+          <label for="guest_count">Estimated guest count</label>
+          <select id="guest_count" name="guest_count" required>
+            <option value="">Choose one…</option>
+            <option>0-25</option>
+            <option>26-50</option>
+            <option>51-100</option>
+            <option>100+</option>
+          </select>
+        </div>
+        <fieldset class="field">
+          <legend>Which service are you interested in?</legend>
+          <label class="choice"><input type="radio" name="service_type" value="custom_package" required> <span><strong>Custom Drink Package (on-site service)</strong> — specialty espresso bar experience with standard cups, full setup and service.</span></label>
+          <label class="choice"><input type="radio" name="service_type" value="cans_20oz"> <span><strong>20 oz iced lattes in signature cans (on-site service)</strong> — freshly crafted iced lattes served at your event in our 20 oz signature cans.</span></label>
+          <label class="choice"><input type="radio" name="service_type" value="cans_12oz_dropoff"> <span><strong>12 oz chilled lattes in signature cans (drop-off only)</strong> — pre-made chilled lattes delivered ready to serve or drink later. No on-site service.</span></label>
+          <label class="choice"><input type="radio" name="service_type" value="not_sure"> <span>Not sure yet, help me decide &lt;3</span></label>
+          <label class="choice"><input type="radio" name="service_type" value="other"> <span>Other</span></label>
+        </fieldset>
+        <fieldset class="field">
+          <legend>Event setup details</legend>
+          <span class="field-hint">We need a flat surface with enough space for our cart and guest flow.</span>
+          <label class="choice"><input type="checkbox" name="setup_details" value="indoor"> <span>Indoor event</span></label>
+          <label class="choice"><input type="checkbox" name="setup_details" value="outdoor"> <span>Outdoor event</span></label>
+          <label class="choice"><input type="checkbox" name="setup_details" value="ground_level"> <span>Ground-level access</span></label>
+        </fieldset>
+        <div class="field">
+          <label for="message">Anything else you'd like to share about your event?</label>
           <textarea id="message" name="message" maxlength="3000"></textarea>
         </div>
         <div class="honeypot" aria-hidden="true">

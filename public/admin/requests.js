@@ -13,7 +13,14 @@ const STATUSES = [
 ];
 const LABEL = Object.fromEntries(STATUSES);
 const CLOSED = new Set(["completed", "cancelled"]);
-const SERVICE = { trailer: "Coffee trailer on-site", cold_cans: "Cold can delivery", other: "Other" };
+const SERVICE = {
+  custom_package: "Custom Drink Package (on-site)",
+  cans_20oz: "20 oz iced lattes in cans (on-site)",
+  cans_12oz_dropoff: "12 oz chilled lattes in cans (drop-off)",
+  not_sure: "Not sure yet",
+  other: "Other",
+};
+const SETUP = { indoor: "Indoor", outdoor: "Outdoor", ground_level: "Ground-level access" };
 
 const list = document.getElementById("requests");
 const filters = document.getElementById("filters");
@@ -96,6 +103,7 @@ function card(r) {
         r.location && detail("Location", r.location),
         r.guest_count != null && detail("Guests", r.guest_count),
         r.service_type && detail("Service", SERVICE[r.service_type] ?? r.service_type),
+        r.setup_details?.length > 0 && detail("Setup", r.setup_details.map((k) => SETUP[k] ?? k).join(", ")),
         r.message && detail("Message", r.message),
         detail("Received", new Date(r.created_at).toLocaleString("en-US", { timeZone: "America/Phoenix" })),
       ),

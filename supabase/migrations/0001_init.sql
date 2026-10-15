@@ -98,8 +98,9 @@ create table public.booking_requests (
   event_date     date,
   event_time     text,
   location       text,
-  guest_count    int check (guest_count is null or guest_count >= 0),
-  service_type   text,
+  guest_count    text check (guest_count in ('0-25', '26-50', '51-100', '100+')),
+  service_type   text check (service_type in ('custom_package', 'cans_20oz', 'cans_12oz_dropoff', 'not_sure', 'other')),
+  setup_details  text[] not null default '{}',
   message        text,
   status         text not null default 'new'
                  check (status in ('new', 'contacted', 'quoted', 'pending_payment', 'paid', 'completed', 'cancelled')),

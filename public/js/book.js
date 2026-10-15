@@ -5,11 +5,20 @@ const status = document.getElementById("form-status");
 const button = form.querySelector('button[type="submit"]');
 const startedAt = Date.now();
 
+const eventType = form.elements.event_type;
+const otherField = document.getElementById("event_type_other_field");
+eventType.addEventListener("change", () => {
+  otherField.hidden = eventType.value !== "Other";
+  form.elements.event_type_other.required = !otherField.hidden;
+});
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   if (!form.reportValidity()) return;
 
-  const body = Object.fromEntries(new FormData(form));
+  const data = new FormData(form);
+  const body = Object.fromEntries(data);
+  body.setup_details = data.getAll("setup_details");
   body.elapsed_ms = Date.now() - startedAt;
 
   button.disabled = true;

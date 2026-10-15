@@ -27,6 +27,8 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
+[hidden] { display: none !important; }
+
 body {
   margin: 0;
   background: var(--color-bg);
@@ -103,6 +105,10 @@ input, select, textarea {
   width: 100%;
 }
 textarea { min-height: 7rem; }
+fieldset.field { border: 0; margin: 0; padding: 0; }
+fieldset.field legend { font-weight: 600; padding: 0; margin-bottom: var(--space-xs); }
+.choice { display: flex; gap: var(--space-sm); align-items: flex-start; font-weight: 400; }
+.choice input { width: auto; margin-top: 0.3rem; }
 .honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 
 .button {

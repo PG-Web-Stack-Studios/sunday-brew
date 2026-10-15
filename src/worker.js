@@ -1,8 +1,18 @@
 // Worker de Cloudflare: sirve /public y atiende /api/booking.
 // (Fase de preview en GitHub Pages: este archivo todavía no se despliega.)
 
-const MAX = { name: 120, email: 200, phone: 40, event_type: 120, event_time: 60, location: 200, service_type: 40, message: 3000 };
-const SERVICES = new Set(["trailer", "cold_cans", "other"]);
+// Campos del Google Form "Private Event Inquiry" de Sunday Brew.
+const MAX = { name: 120, email: 200, phone: 40, event_type: 120, event_type_other: 120, event_time: 20, location: 200, message: 3000 };
+const REQUIRED = { name: "your name", phone: "a phone number", event_type: "the event type", location: "the event location" };
+const GUESTS = new Set(["0-25", "26-50", "51-100", "100+"]);
+const SERVICES = {
+  custom_package: "Custom Drink Package (on-site)",
+  cans_20oz: "20 oz iced lattes in cans (on-site)",
+  cans_12oz_dropoff: "12 oz chilled lattes in cans (drop-off)",
+  not_sure: "Not sure yet, help me decide",
+  other: "Other",
+};
+const SETUP = { indoor: "Indoor", outdoor: "Outdoor", ground_level: "Ground-level access" };
 const RATE_LIMIT = { max: 5, windowMs: 10 * 60 * 1000 };
 const hits = new Map(); // por isolate; complementa el honeypot, no es un límite global
 
@@ -65,25 +75,28 @@ function validate(b) {
   const data = {};
   for (const [key, max] of Object.entries(MAX)) {
     const v = typeof b[key] === "string" ? b[key].trim() : "";
-    if (v.length > max) return { error: `"${key.replace("_", " ")}" is too long.` };
+    if (v.length > max) return { error: `"${key.replaceAll("_", " ")}" is too long.` };
     data[key] = v || null;
   }
-  if (!data.name) return { error: "Please enter your name." };
+  if (data.event_type === "Other" && data.event_type_other) data.event_type = data.event_type_other;
+  delete data.event_type_other;
+
+  for (const [key, label] of Object.entries(REQUIRED)) {
+    if (!data[key]) return { error: `Please enter ${label}.` };
+  }
   if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return { error: "Please enter a valid email." };
-  if (data.service_type && !SERVICES.has(data.service_type)) data.service_type = "other";
 
-  data.event_date = null;
-  if (b.event_date) {
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(b.event_date) || isNaN(Date.parse(b.event_date))) return { error: "Please enter a valid date." };
-    data.event_date = b.event_date;
-  }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(b.event_date ?? "") || isNaN(Date.parse(b.event_date))) return { error: "Please enter a valid event date." };
+  data.event_date = b.event_date;
 
-  data.guest_count = null;
-  if (b.guest_count !== undefined && b.guest_count !== "") {
-    const n = Number(b.guest_count);
-    if (!Number.isInteger(n) || n < 0 || n > 100000) return { error: "Please enter a valid number of guests." };
-    data.guest_count = n;
-  }
+  if (!GUESTS.has(b.guest_count)) return { error: "Please choose an estimated guest count." };
+  data.guest_count = b.guest_count;
+
+  if (!(b.service_type in SERVICES)) return { error: "Please choose a service." };
+  data.service_type = b.service_type;
+
+  const setup = Array.isArray(b.setup_details) ? b.setup_details : [];
+  data.setup_details = [...new Set(setup.filter((s) => s in SETUP))];
   return { data };
 }
 
@@ -91,7 +104,8 @@ function ownerEmail(d) {
   const lines = [
     ["Name", d.name], ["Email", d.email], ["Phone", d.phone], ["Event type", d.event_type],
     ["Date", d.event_date], ["Time", d.event_time], ["Location", d.location],
-    ["Guests", d.guest_count], ["Service", d.service_type], ["Details", d.message],
+    ["Guests", d.guest_count], ["Service", SERVICES[d.service_type]],
+    ["Setup", d.setup_details.map((k) => SETUP[k]).join(", ")], ["Details", d.message],
   ];
   return [
     "New booking request from the website:",
