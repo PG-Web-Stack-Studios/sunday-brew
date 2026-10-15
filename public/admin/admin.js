@@ -7,22 +7,22 @@ export { supabase, el };
 export async function requireAdmin() {
   const { data: { session } } = await supabase.auth.getSession();
   if (!session) {
-    location.replace("login.html");
+    location.replace("login");
     return new Promise(() => {}); // detiene la página mientras redirige
   }
   const { data: admin } = await supabase.from("admins").select("user_id").eq("user_id", session.user.id).maybeSingle();
   if (!admin) {
     await supabase.auth.signOut();
-    location.replace("login.html?denied=1");
+    location.replace("login?denied=1");
     return new Promise(() => {});
   }
 
   document.getElementById("logout")?.addEventListener("click", async () => {
     await supabase.auth.signOut();
-    location.replace("login.html");
+    location.replace("login");
   });
   supabase.auth.onAuthStateChange((event) => {
-    if (event === "SIGNED_OUT") location.replace("login.html");
+    if (event === "SIGNED_OUT") location.replace("login");
   });
   document.querySelector("main").hidden = false;
   return session;

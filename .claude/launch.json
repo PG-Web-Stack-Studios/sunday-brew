@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "static",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "-d", "public", "8000"],
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "serve@14.2.4", "-l", "8000", "public"],
       "port": 8000
     }
   ]

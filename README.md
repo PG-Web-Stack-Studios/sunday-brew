@@ -54,7 +54,7 @@ Cambiar una variable requiere volver a desplegar.
 
 ```bash
 npx wrangler dev        # sitio + /api/booking (usa .dev.vars)
-python3 -m http.server -d public 8000   # solo estático, como GitHub Pages
+npx serve public -l 8000   # solo estático, URLs sin .html como GitHub Pages
 ```
 
 ## Fases de diseño

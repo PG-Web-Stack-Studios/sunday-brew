@@ -4,7 +4,7 @@ const form = document.getElementById("login-form");
 const status = document.getElementById("form-status");
 
 const { data: { session } } = await supabase.auth.getSession();
-if (session && !new URLSearchParams(location.search).has("denied")) location.replace("index.html");
+if (session && !new URLSearchParams(location.search).has("denied")) location.replace("./");
 
 if (new URLSearchParams(location.search).has("denied")) {
   status.replaceChildren(el("p", { class: "notice notice-error" }, "This account doesn't have admin access."));
@@ -21,5 +21,5 @@ form.addEventListener("submit", async (e) => {
     status.replaceChildren(el("p", { class: "notice notice-error" }, "Wrong email or password."));
     return;
   }
-  location.replace("index.html");
+  location.replace("./");
 });
