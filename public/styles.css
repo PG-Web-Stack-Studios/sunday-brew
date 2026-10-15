@@ -2,19 +2,20 @@
    El look de marca (fase 2) se cambia aquí, sobre todo en :root. */
 
 :root {
-  /* Colores de marca (Marion, 2026-10-14): verde #26342b y crema #F5EFE5 */
+  /* Colores de marca (Marion, 2026-10-14): verde, crema y rosado */
   --color-brand-green: #26342b;
   --color-brand-cream: #F5EFE5;
+  --color-brand-blush: #E6CBBA;
 
   --color-bg: var(--color-brand-cream);
-  --color-surface: #ebe3d6;
+  --color-surface: var(--color-brand-blush);
   --color-text: var(--color-brand-green);
-  --color-muted: #535f57;
-  --color-border: #d6cbb9;
+  --color-muted: #47524b;
+  --color-border: #d9bba8;
   --color-accent: var(--color-brand-green);
   --color-accent-text: var(--color-brand-cream);
   --color-error: #b00020;
-  --color-success: #1b6e20;
+  --color-success: #155a1a;
 
   --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-heading: var(--font-body);
@@ -39,6 +40,9 @@ body {
   color: var(--color-text);
   font-family: var(--font-body);
   line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 h1, h2, h3 { font-family: var(--font-heading); line-height: 1.2; }
@@ -69,10 +73,11 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .site-nav a[aria-current="page"] { font-weight: 700; }
 
-main { padding: var(--space-lg) 0 var(--space-xl); }
+main { flex: 1; padding: var(--space-lg) 0 var(--space-xl); }
 
 .site-footer {
   border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
   padding: var(--space-md) 0;
   color: var(--color-muted);
   font-size: 0.9rem;
