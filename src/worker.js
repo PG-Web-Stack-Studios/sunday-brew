@@ -84,6 +84,13 @@ function validate(b) {
   for (const [key, label] of Object.entries(REQUIRED)) {
     if (!data[key]) return { error: `Please enter ${label}.` };
   }
+
+  // Teléfono con código de país: "+1 6025550123"
+  const country = typeof b.phone_country === "string" && /^\+\d{1,4}$/.test(b.phone_country) ? b.phone_country : "+1";
+  const digits = data.phone.replace(/[^\d]/g, "");
+  if (digits.length < 7 || digits.length > 15) return { error: "Please enter a valid phone number." };
+  // Si escribieron el número con "+" ya trae su código; se respeta tal cual.
+  data.phone = data.phone.startsWith("+") ? `+${digits}` : `${country} ${digits}`;
   if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return { error: "Please enter a valid email." };
 
   if (!/^\d{4}-\d{2}-\d{2}$/.test(b.event_date ?? "") || isNaN(Date.parse(b.event_date))) return { error: "Please enter a valid event date." };
