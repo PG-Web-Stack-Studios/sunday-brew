@@ -240,7 +240,7 @@ create policy "public-images admin delete" on storage.objects
 -- ---------------------------------------------------------------------------
 insert into public.site_settings (key, value) values
   ('amazon_storefront_url', '""'),
-  ('stan_store_url', '""'),
+  ('stan_store_url', '"https://stan.store/Marionnfelix"'),
   ('home_story', '""')
 on conflict (key) do nothing;
 

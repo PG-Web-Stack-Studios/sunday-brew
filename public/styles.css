@@ -2,13 +2,17 @@
    El look de marca (fase 2) se cambia aquí, sobre todo en :root. */
 
 :root {
-  --color-bg: #ffffff;
-  --color-surface: #f5f5f5;
-  --color-text: #1a1a1a;
-  --color-muted: #666666;
-  --color-border: #dddddd;
-  --color-accent: #333333;
-  --color-accent-text: #ffffff;
+  /* Colores de marca (Marion, 2026-10-14): verde #26342b y crema #F5EFE5 */
+  --color-brand-green: #26342b;
+  --color-brand-cream: #F5EFE5;
+
+  --color-bg: var(--color-brand-cream);
+  --color-surface: #ebe3d6;
+  --color-text: var(--color-brand-green);
+  --color-muted: #535f57;
+  --color-border: #d6cbb9;
+  --color-accent: var(--color-brand-green);
+  --color-accent-text: var(--color-brand-cream);
   --color-error: #b00020;
   --color-success: #1b6e20;
 
@@ -99,6 +103,8 @@ main { padding: var(--space-lg) 0 var(--space-xl); }
 .field-hint { color: var(--color-muted); font-size: 0.9rem; }
 input, select, textarea {
   font: inherit;
+  color: var(--color-text);
+  background: #fffdf9;
   padding: var(--space-sm);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
