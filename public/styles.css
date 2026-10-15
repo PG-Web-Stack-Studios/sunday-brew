@@ -116,7 +116,17 @@ fieldset.field legend { font-weight: 600; padding: 0; margin-bottom: var(--space
 .choice { display: flex; gap: var(--space-sm); align-items: flex-start; font-weight: 400; }
 .choice input { width: auto; margin-top: 0.3rem; }
 .phone-input { display: flex; gap: var(--space-sm); }
-.phone-input select { width: auto; flex: none; }
+.country-picker { position: relative; flex: none; }
+.country-picker-label {
+  display: flex; align-items: center; gap: var(--space-xs); height: 100%;
+  padding: var(--space-sm) 1.75rem var(--space-sm) var(--space-sm);
+  border: 1px solid var(--color-border); border-radius: var(--radius); background: #fffdf9;
+  white-space: nowrap;
+}
+.country-picker-label::after { content: "▾"; position: absolute; right: var(--space-sm); color: var(--color-muted); }
+/* El select real queda encima, invisible: abre la lista completa con nombres. */
+.country-picker select { position: absolute; inset: 0; opacity: 0; width: 100%; cursor: pointer; }
+.country-picker:focus-within .country-picker-label { outline: 2px solid var(--color-accent); outline-offset: 1px; }
 .phone-input input { flex: 1; min-width: 0; }
 .honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 
