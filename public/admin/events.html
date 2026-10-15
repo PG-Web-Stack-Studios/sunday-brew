@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Events — Sunday Brew Admin</title>
+  <link rel="stylesheet" href="../styles.css">
+  <script src="../config.js"></script>
+  <script type="module" src="events.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="site-title" href="index.html">Sunday Brew Admin</a>
+      <nav class="site-nav" aria-label="Admin">
+        <ul>
+          <li><a href="index.html">Requests</a></li>
+          <li><a href="events.html" aria-current="page">Events</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="merch.html">Merch</a></li>
+          <li><a href="settings.html">Settings</a></li>
+          <li><a href="../index.html">View site</a></li>
+          <li><button id="logout" class="button button-secondary" type="button">Log out</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main hidden>
+    <div class="container">
+      <h1>Events &amp; locations</h1>
+      <p><button id="new-event" class="button" type="button">+ Add event</button></p>
+      <div id="editor"></div>
+      <h2>Upcoming</h2>
+      <ul id="upcoming" class="card-list"><li class="muted">Loading…</li></ul>
+      <details>
+        <summary>Past events</summary>
+        <ul id="past" class="card-list"></ul>
+      </details>
+    </div>
+  </main>
+</body>
+</html>

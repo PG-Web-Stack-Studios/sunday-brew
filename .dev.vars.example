@@ -1,0 +1,5 @@
+# Copiar a .dev.vars para `npx wrangler dev` (nunca subir .dev.vars)
+SUPABASE_URL=
+SUPABASE_SERVICE_ROLE_KEY=
+RESEND_API_KEY=
+BOOKING_NOTIFY_TO=sundaybrewcoffeeco@gmail.com

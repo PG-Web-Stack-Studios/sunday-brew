@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Requests — Sunday Brew Admin</title>
+  <link rel="stylesheet" href="../styles.css">
+  <script src="../config.js"></script>
+  <script type="module" src="requests.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="site-title" href="index.html">Sunday Brew Admin</a>
+      <nav class="site-nav" aria-label="Admin">
+        <ul>
+          <li><a href="index.html" aria-current="page">Requests</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="merch.html">Merch</a></li>
+          <li><a href="settings.html">Settings</a></li>
+          <li><a href="../index.html">View site</a></li>
+          <li><button id="logout" class="button button-secondary" type="button">Log out</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main hidden>
+    <div class="container">
+      <h1>Booking requests</h1>
+      <div class="counters">
+        <div class="counter"><strong id="count-new">–</strong>New (not answered)</div>
+        <div class="counter"><strong id="count-pending">–</strong>Pending payment</div>
+      </div>
+      <form id="filters" class="admin-toolbar">
+        <div class="field">
+          <label for="filter-status">Status</label>
+          <select id="filter-status" name="status">
+            <option value="open">All open</option>
+            <option value="">Everything</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="filter-from">Event from</label>
+          <input id="filter-from" name="from" type="date">
+        </div>
+        <div class="field">
+          <label for="filter-to">Event to</label>
+          <input id="filter-to" name="to" type="date">
+        </div>
+      </form>
+      <ul id="requests" class="card-list" aria-live="polite"><li class="muted">Loading…</li></ul>
+    </div>
+  </main>
+</body>
+</html>

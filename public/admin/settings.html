@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Settings — Sunday Brew Admin</title>
+  <link rel="stylesheet" href="../styles.css">
+  <script src="../config.js"></script>
+  <script type="module" src="settings.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="site-title" href="index.html">Sunday Brew Admin</a>
+      <nav class="site-nav" aria-label="Admin">
+        <ul>
+          <li><a href="index.html">Requests</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="merch.html">Merch</a></li>
+          <li><a href="settings.html" aria-current="page">Settings</a></li>
+          <li><a href="../index.html">View site</a></li>
+          <li><button id="logout" class="button button-secondary" type="button">Log out</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main hidden>
+    <div class="container">
+      <h1>Settings</h1>
+      <form id="settings-form" class="form">
+        <div class="field">
+          <label for="amazon_storefront_url">Amazon storefront link</label>
+          <input id="amazon_storefront_url" name="amazon_storefront_url" type="url" placeholder="https://…">
+        </div>
+        <div class="field">
+          <label for="stan_store_url">Stan Store link (training cards)</label>
+          <input id="stan_store_url" name="stan_store_url" type="url" placeholder="https://…">
+        </div>
+        <div class="field">
+          <label for="home_story">Home page story</label>
+          <textarea id="home_story" name="home_story" rows="10"></textarea>
+          <span class="field-hint">Leave a blank line between paragraphs.</span>
+        </div>
+        <p><button class="button" type="submit">Save</button></p>
+        <div id="form-status" aria-live="polite"></div>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

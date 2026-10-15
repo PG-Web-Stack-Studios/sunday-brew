@@ -1,0 +1,140 @@
+/* Sunday Brew Coffee — Fase 1: estilo básico y neutro.
+   El look de marca (fase 2) se cambia aquí, sobre todo en :root. */
+
+:root {
+  --color-bg: #ffffff;
+  --color-surface: #f5f5f5;
+  --color-text: #1a1a1a;
+  --color-muted: #666666;
+  --color-border: #dddddd;
+  --color-accent: #333333;
+  --color-accent-text: #ffffff;
+  --color-error: #b00020;
+  --color-success: #1b6e20;
+
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-heading: var(--font-body);
+
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+
+  --radius: 4px;
+  --max-width: 760px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+h1, h2, h3 { font-family: var(--font-heading); line-height: 1.2; }
+
+a { color: var(--color-accent); }
+
+img { max-width: 100%; height: auto; display: block; }
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+/* Header y navegación */
+.site-header {
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-md) 0;
+}
+.site-title { font-weight: 700; font-size: 1.25rem; text-decoration: none; color: var(--color-text); }
+.site-nav ul {
+  list-style: none;
+  margin: var(--space-sm) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-md);
+}
+.site-nav a[aria-current="page"] { font-weight: 700; }
+
+main { padding: var(--space-lg) 0 var(--space-xl); }
+
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-md) 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+/* Listas de tarjetas (eventos, menú, merch) */
+.card-list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-md); }
+.card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+}
+.card h3 { margin: 0 0 var(--space-xs); }
+.card-meta { color: var(--color-muted); margin: 0; }
+.card-image { margin-bottom: var(--space-sm); border-radius: var(--radius); }
+
+.sizes { list-style: none; padding: 0; margin: var(--space-sm) 0 0; display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+.sizes li { background: var(--color-surface); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius); }
+
+.menu-category { margin-top: var(--space-lg); }
+
+.tabs { display: flex; gap: var(--space-sm); margin-bottom: var(--space-md); }
+
+/* Formularios */
+.form { display: grid; gap: var(--space-md); }
+.field { display: grid; gap: var(--space-xs); }
+.field label { font-weight: 600; }
+.field-hint { color: var(--color-muted); font-size: 0.9rem; }
+input, select, textarea {
+  font: inherit;
+  padding: var(--space-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  width: 100%;
+}
+textarea { min-height: 7rem; }
+.honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+
+.button {
+  font: inherit;
+  display: inline-block;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius);
+  background: var(--color-accent);
+  color: var(--color-accent-text);
+  text-decoration: none;
+  cursor: pointer;
+}
+.button-secondary { background: transparent; color: var(--color-accent); }
+.button-danger { background: transparent; color: var(--color-error); border-color: var(--color-error); }
+.button:disabled { opacity: 0.6; cursor: wait; }
+
+.notice { padding: var(--space-sm) var(--space-md); border-radius: var(--radius); background: var(--color-surface); }
+.notice-error { color: var(--color-error); }
+.notice-success { color: var(--color-success); }
+
+.muted { color: var(--color-muted); }
+
+/* Admin */
+.admin-toolbar { display: flex; flex-wrap: wrap; gap: var(--space-sm); align-items: end; margin-bottom: var(--space-md); }
+.admin-toolbar .field { min-width: 10rem; flex: 1; }
+.counters { display: flex; gap: var(--space-md); flex-wrap: wrap; margin-bottom: var(--space-md); }
+.counter { background: var(--color-surface); padding: var(--space-sm) var(--space-md); border-radius: var(--radius); }
+.counter strong { font-size: 1.5rem; display: block; }
+.status { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--color-muted); }
+.row { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+.row > .field { flex: 1; min-width: 8rem; }
+details.card summary { cursor: pointer; }
+.size-row { display: flex; gap: var(--space-sm); align-items: center; }
+.size-row input { flex: 1; }
