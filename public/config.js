@@ -4,4 +4,6 @@ window.SB_CONFIG = {
   SUPABASE_ANON_KEY: "sb_publishable_fRHJuoVaSAYtEJOOA8rXHQ_vVizHg2V",
   // En GitHub Pages no hay backend; el formulario funciona cuando el sitio pase a Cloudflare.
   BOOKING_API_URL: "/api/booking",
+  // Mientras sea true, el formulario de Book Us es solo de muestra y no envía nada.
+  BOOKING_DEMO: true,
 };

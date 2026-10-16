@@ -153,6 +153,17 @@ fieldset.field legend { font-weight: 600; padding: 0; margin-bottom: var(--space
 .notice { padding: var(--space-sm) var(--space-md); border-radius: var(--radius); background: var(--color-surface); }
 .notice-error { color: var(--color-error); }
 .notice-success { color: var(--color-success); }
+.notice-demo { border: 1px dashed var(--color-text); background: transparent; }
+
+/* Aviso de preview (quitar al aplicar el diseño final) */
+.preview-banner {
+  margin: 0;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-size: 0.9rem;
+  text-align: center;
+}
 
 .muted { color: var(--color-muted); }
 

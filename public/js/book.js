@@ -45,6 +45,11 @@ form.addEventListener("submit", async (e) => {
   body.setup_details = data.getAll("setup_details");
   body.elapsed_ms = Date.now() - startedAt;
 
+  if (window.SB_CONFIG.BOOKING_DEMO) {
+    status.replaceChildren(el("p", { class: "notice notice-demo" }, "This is a demo form — your request wasn't sent. Booking requests will start working once the site launches."));
+    return;
+  }
+
   button.disabled = true;
   status.replaceChildren(el("p", { class: "notice" }, "Sending…"));
 
